@@ -11,7 +11,7 @@ try {
 
 	$u2 = new User("Marvin");
 	$u2->save($dbh);
-
+	
 	if(!(isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1)) {
 		if(!isset($_COOKIE['Visitor'])) {
 			setCookie("Visitor", "1");

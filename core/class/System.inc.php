@@ -1,11 +1,5 @@
 <?php
-	/*
-		@author:	Andr� Lichtenth�ler
-		@copyright:	Andr� Lichtenth�ler, 2016
-		@version:	2.0.2
-		@since:		1.0.0 First introduced
-		@since:		2.0.2 PDO-Utilize
-	*/
+	// TODO: Statisch?
 
 	class System {
 		private $pdo;

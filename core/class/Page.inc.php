@@ -1,11 +1,4 @@
 ﻿<?php
-	/*
-		@author:	André Lichtenthäler
-		@copyright:	André Lichtenthäler, 2016
-		@version:	1.0.0 (?)
-		@since:		1.0.0 First introduced
-	*/
-	
 	class Page {
 		private $pid = null;
 		private $title = "DEFAULT";
@@ -22,42 +15,42 @@
 				throw new Exception("[PAGE] " . mysql_error());
 			}
 		}
-		
+
 		public function create($_pid, $_added) {
 			$this->pid = $_pid;
 			$this->added = $_added;
-			
+
 			$createPage = "INSERT INTO cms_pages (`pid`, `title`, `content`, `added`, `modified`) VALUES ('{$this->pid}', NULL, NULL, '{$this->added}', NULL)";
-			
+
 			if(!mysql_query($createPage)){
 				throw new Exception("[PAGE] "  .mysql_error());
 			}
 		}
-		
+
 		public function delete() {
 			return null;
 		}
-		
+
 		public function edit() {
 			return null;
 		}
-		
+
 		public function setContent() {
 			$tthis->content = print_r($_SERVER);
 		}
-		
+
 		public function show() {
 			echo <<<EOT
 <!DOCTYPE HTML>
 <html lang="{$this->language}">
 	<head>
 		<title>{$this->title}</title>
-		<meta charset="{$this->charset}"> 
+		<meta charset="{$this->charset}">
 	</head>
 	<body>
 	{$this->content}
 	</body>
-</html>	
+</html>
 EOT;
 		}
 	}

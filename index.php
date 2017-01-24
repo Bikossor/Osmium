@@ -61,7 +61,7 @@ EOT;
 					echo "<a href='?action=Article&page={$nextPage}'>Nächste</a>";
 
 					echo "<pre>";
-					print_r(ArticleHandler::getAll($dbh, $currentPage, $articlesPerPage));
+					print_r(ArticleHandler::getAll($currentPage, $articlesPerPage));
 					echo "</pre>";
 				break;
 				case "API":
