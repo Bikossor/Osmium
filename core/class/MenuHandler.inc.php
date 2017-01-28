@@ -2,30 +2,24 @@
 	class MenuHandler implements Iterator, Countable {
 		private $name;
 		private $item = [];
-
 		private $index = 0;
 		private $count = 0;
-
 		private $dbh;
 
 		function __construct(PDO $_dbh, $_name) {
 			$this->dbh = $_dbh;
-			$this->name = mysql_real_escape_string($_name);
+			$this->name = $_name;
 
-			$sql = sprintf("SELECT title, href FROM menu_items WHERE menu='%s' ORDER BY position ASC", $this->name);
-			$query = mysql_query($sql);
-			$this->count = mysql_num_rows($query);
-			
+			$sth = $this->dbh->prepare('SELECT title, href FROM menu_items WHERE menu=:name ORDER BY position');
+			$sth->execute([':name' => $this->name]);
+
+			$this->count = $sth->rowCount();
+
 			if($this->count > 0) {
-				while($data = mysql_fetch_assoc($query)) {
-					$this->item[] = [
-						'title'=>$data['title'],
-						'href'=>$data['href']
-					];
-				}
+				$this->item = $sth->fetchAll(PDO::FETCH_ASSOC);
 			}
 			else {
-				throw new Exception(sprintf("[%s](%s): Kein Menü vorhanden!", __CLASS__, __LINE__));
+				throw new Exception(sprintf("[%s](%s): Kein Einträge vorhanden!", __CLASS__, __LINE__));
 			}
 		}
 
