@@ -1,7 +1,7 @@
 # Content-Management-System (CMS) #
 
 ## Description ##
-- A simple and easy-to-use Content-Management-System, written in PHP by [André Lichtenthäler](https://twitter/Bikossor).
+- A simple and easy-to-use Content-Management-System, written in PHP by [André Lichtenthäler](https://twitter.com/Bikossor).
 - *Still work in progress!*
 - *Feature-List and more will be added later*
 
