@@ -10,7 +10,11 @@
 
 	function load_class($class) {
 		try {
-			include_once(printf("./core/class/%s.inc.php", $class));
+			$file = printf("./core/class/%s.inc.php", $class);
+
+			var_dump(file_exists($file));
+			//include_once();
+			//echo getcwd();
 		}
 		catch (Exception $e) {
 			print_r($e);

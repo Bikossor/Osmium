@@ -9,6 +9,7 @@
 			}
 			else {
 				throw new InvalidArgumentException(sprintf("Invalid argument at %s:%s", __CLASS__, __LINE__));
+				return false;
 			}
 		}
 
@@ -26,6 +27,7 @@
 			}
 			else {
 				throw new InvalidArgumentException(sprintf("Invalid argument at %s:%s", __CLASS__, __LINE__));
+				return false;
 			}
 		}
 
