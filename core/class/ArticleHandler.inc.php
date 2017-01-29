@@ -1,30 +1,29 @@
 <?php
 	class ArticleHandler implements Iterator, Countable {
 		private $index = 0;
-		private $counter = 0;
-		private $articles = [];
+		private $count = 0;
+		private $article = [];
 		private $dbh;
 
 		function __construct(PDO $_dbh) {
-			mysql_query("SET NAMES UTF8");
-			$sql = "SELECT title, user.name AS 'author', content, DATE_FORMAT(created, '%d.%m.%Y') AS created, DATE_FORMAT(last_modified,'%d.%m.%Y') AS last_modified FROM article INNER JOIN user ON article.author=user.id WHERE status=0";
-			$query = mysql_query($sql);
-
-			$this->counter = mysql_num_rows($query);
 			$this->dbh = $_dbh;
 
-			if($this->counter > 0) {
-				while($data = mysql_fetch_assoc($query)) {
-					$this->articles[] = ['title'=>$data['title'],'author'=>$data['author'],'content'=>$data['content'],'created'=>$data['created'],'last_modified'=>$data['last_modified']];
+			$sql = "SELECT title, cms_user.name AS 'author', content, DATE_FORMAT(created, '%d.%m.%Y') AS created, DATE_FORMAT(last_modified, '%d.%m.%Y') AS last_modified FROM cms_articles LEFT JOIN cms_user ON cms_articles.author=cms_user.id WHERE status=0";
+
+			if($sth = $this->dbh->query($sql)) {
+				$this->count = $sth->rowCount();
+
+				if($this->count > 0) {
+					$this->article = $sth->fetchAll(PDO::FETCH_ASSOC);
 				}
 			}
 			else {
-				throw new Exception(sprintf("[%s](%s): Keine Artikel vorhanden!", __CLASS__, __LINE__));
+				throw new PDOException(sprintf("PDO error at %s:%s", __CLASS__, __LINE__));
 			}
 		}
 
 		public function current() {
-			return $this->articles[$this->index];
+			return $this->article[$this->index];
 		}
 
 		public function next() {
@@ -36,7 +35,7 @@
 		}
 
 		public function valid() {
-			return isset($this->articles[$this->index]);
+			return isset($this->article[$this->index]);
 		}
 
 		public function rewind() {
@@ -44,19 +43,19 @@
 		}
 
 		public function count() {
-			return $this->counter;
+			return $this->count;
 		}
 
 		public function getByTitle($_title) {
-			for($i = 0; $i <= $this->counter; $i++) {
-				if($this->articles[$i]['title'] == $_title) {
-					return $this->articles[$i];
+			for($i = 0; $i <= $this->count; $i++) {
+				if($this->article[$i]['title'] == $_title) {
+					return $this->article[$i];
 				}
 			}
 		}
 
 		public function setupTable() {
-			$sql = "CREATE TABLE IF NOT EXISTS `article` (
+			$sql = $this->dbh->query("CREATE TABLE IF NOT EXISTS `cms_articles` (
 				`title` varchar(100) NOT NULL,
 				`title_sdx` varchar(7) NOT NULL,
 				`content` text NOT NULL,
@@ -65,16 +64,20 @@
 				`status` int(1) UNSIGNED NOT NULL,
 				`author` int(10) UNSIGNED NOT NULL,
 				PRIMARY KEY (`title`)
-			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
-			if(!mysql_query($sql)) {
-				throw new Exception(sprintf("<p>[%s](%s): Tabelle konnte nicht erstellt werden!</p>", __CLASS__, __LINE__));
+			if($sql) {
+				return true;
+			}
+			else {
+				throw new PDOException(sprintf("<p>[%s](%s): Tabelle konnte nicht erstellt werden!</p>", __CLASS__, __LINE__));
+				return false;
 			}
 		}
 
-		static public function getAll($_page = 1, $_articlesPerPage) {
+		static public function getAll($_page = 1, $_articlesPerPage) { // TODO: NEW
 			if($_articlesPerPage === null) {
-				//$_articlesPerPage = System::getSetting($this->$dbh, "articlesPerPage");
+				$_articlesPerPage = System::getSetting($this->$dbh, "articlesPerPage");
 			}
 
 			$offset = ($_page - 1) * $_articlesPerPage;
@@ -98,11 +101,7 @@
 			}
 		}
 
-		static public function getArticlesPerPage(PDO $_dbh) {
-			return System::getSetting($_dbh, "articlesPerPage");
-		}
-
-		static public function write($_title, $_content) {
+		static public function write($_title, $_content) { // TODO: NEW
 			if(!mysql_query("INSERT INTO cms_articles (aid, title, content, added) VALUES (NULL, '{$_title}', '{$_content}', NOW())")) {
 				throw new Exception(__METHOD__ . " - " . mysql_error());
 			}

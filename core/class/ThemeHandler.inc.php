@@ -1,6 +1,6 @@
 <?php
 	class ThemeHandler {
-		static function get_id(PDO $_dbh) {
+		static function getId(PDO $_dbh) {
 			if(class_exists("System")) {
 				return System::getSetting($_dbh, "selectedTheme");
 			}
@@ -9,19 +9,19 @@
 			}
 		}
 
-		static function get_name(PDO $_dbh) {
-			$q = mysql_query("SELECT name FROM cms_themes WHERE tid=" . ThemeHandler::get_id($_dbh) . " LIMIT 1");
+		static function getName(PDO $_dbh) {
+			$q = mysql_query("SELECT name FROM cms_themes WHERE tid=" . ThemeHandler::getId($_dbh) . " LIMIT 1");
 
-			return $q; //----------------------------------------------------------------------------------------------------------------
+			return $q;
 
 			$d = mysql_fetch_assoc($q);
 
 			return $d['name'];
 		}
 
-		static function get_path() {
-			if(file_exists("./theme/" . ThemeHandler::get_name())) {
-				return "./theme/" . ThemeHandler::get_name();
+		static function getPath() {
+			if(file_exists("./theme/" . ThemeHandler::getName())) {
+				return "./theme/" . ThemeHandler::getName();
 			}
 			else if(file_exists("./theme/default")) {
 				return "./theme/default";
@@ -31,9 +31,9 @@
 			}
 		}
 
-		static function get_file(PDO $_dbh, $_file) {
-			if(file_exists("./theme/" . ThemeHandler::get_name($_dbh) . $_file)) {
-				return "./theme/" . ThemeHandler::get_name($_dbh) . $_file;
+		static function getFile(PDO $_dbh, $_file) {
+			if(file_exists("./theme/" . ThemeHandler::getName($_dbh) . $_file)) {
+				return "./theme/" . ThemeHandler::getName($_dbh) . $_file;
 			}
 			else if(file_exists("./theme/default" . $_file)) {
 				return "./theme/default" . $_file;

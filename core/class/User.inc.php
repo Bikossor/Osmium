@@ -1,5 +1,6 @@
 ﻿<?php
 	class User {
+		// TODO: Make it to a handler-class
 		protected $_table = "cms_user";
 		protected $_name;
 

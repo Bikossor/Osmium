@@ -13,7 +13,7 @@
 
 		$sys = new System($dbh);
 
-		echo "<link rel='stylesheet' href='" . ThemeHandler::get_file($dbh, "/styles/style.css") . "'>";
+		echo "<link rel='stylesheet' href='" . ThemeHandler::getFile($dbh, "/styles/style.css") . "'>";
 		echo <<<EOT
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<h1>Content-Management-System</h1>
@@ -29,7 +29,7 @@ EOT;
 		if(isset($_GET['action'])) {
 			switch($_GET['action']) {
 				case "ThemeHandler":
-					echo "<img src='" . ThemeHandler::get_file($dbh, "/header.jpg") . "' style='width:30%;height:auto'><br/>";
+					echo "<img src='" . ThemeHandler::getFile($dbh, "/header.jpg") . "' style='width:30%;height:auto'><br/>";
 
 					$dirTheme = "./theme/";
 					$dir = scandir($dirTheme);

@@ -1,6 +1,7 @@
 ﻿<?php
 	include_once("./core/class/MenuHandler.inc.php");
 	include_once("./core/class/System.inc.php");
+	include_once("./core/class/ArticleHandler.inc.php");
 
 	try {
 		$dbh = new PDO('mysql:host=localhost;dbname=cms', 'root', '');
@@ -12,6 +13,12 @@
 		foreach ($menu as $item) {
 			echo $item['title'];
 		}
+
+		$ah = new ArticleHandler($dbh);
+		foreach ($ah as $item) {
+			echo "<pre>", var_dump($item), "</pre>";
+		}
+
 
 		var_dump(System::setSetting($dbh, "dwawddwa", 0));
 

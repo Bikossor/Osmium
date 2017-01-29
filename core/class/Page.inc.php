@@ -8,12 +8,9 @@
 		private $author = "André Lichtenthäler";
 		private $robots;
 		private $content;
-		
+
 		function __construct() {
-			$createTable = "CREATE TABLE IF NOT EXISTS `cms`.`cms_pages` ( `pid` VARCHAR(8) NOT NULL , `title` VARCHAR(100) NULL , `content` TEXT NULL , `added` INT(10) NOT NULL , `modified` INT(10) NULL , PRIMARY KEY (`pid`) ) ENGINE = InnoDB;";
-			if(!mysql_query($createTable)){
-				throw new Exception("[PAGE] " . mysql_error());
-			}
+
 		}
 
 		public function create($_pid, $_added) {
@@ -24,6 +21,13 @@
 
 			if(!mysql_query($createPage)){
 				throw new Exception("[PAGE] "  .mysql_error());
+			}
+		}
+
+		public function setupTable() {
+			$createTable = "CREATE TABLE IF NOT EXISTS `cms`.`cms_pages` ( `pid` VARCHAR(8) NOT NULL , `title` VARCHAR(100) NULL , `content` TEXT NULL , `added` INT(10) NOT NULL , `modified` INT(10) NULL , PRIMARY KEY (`pid`) ) ENGINE = InnoDB;";
+			if(!mysql_query($createTable)){
+				throw new Exception("[PAGE] " . mysql_error());
 			}
 		}
 

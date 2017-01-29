@@ -7,19 +7,24 @@
 		private $dbh;
 
 		function __construct(PDO $_dbh, $_name) {
-			$this->dbh = $_dbh;
-			$this->name = $_name;
+			if(!empty($_name)) {
+				$this->dbh = $_dbh;
+				$this->name = $_name;
 
-			$sth = $this->dbh->prepare('SELECT title, href FROM menu_items WHERE menu=:name ORDER BY position');
-			$sth->execute([':name' => $this->name]);
+				$sth = $this->dbh->prepare('SELECT title, href FROM menu_items WHERE menu=:name ORDER BY position');
+				if($sth->execute([':name' => $this->name])) {
+					$this->count = $sth->rowCount();
 
-			$this->count = $sth->rowCount();
-
-			if($this->count > 0) {
-				$this->item = $sth->fetchAll(PDO::FETCH_ASSOC);
+					if($this->count > 0) {
+						$this->item = $sth->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				else {
+					throw new PDOException(sprintf("PDO error at %s:%s", __CLASS__, __LINE__));
+				}
 			}
 			else {
-				throw new Exception(sprintf("[%s](%s): Kein Einträge vorhanden!", __CLASS__, __LINE__));
+				throw new InvalidArgumentException(sprintf("Invalid argument at %s:%s", __CLASS__, __LINE__));
 			}
 		}
 
