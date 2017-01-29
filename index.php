@@ -1,7 +1,7 @@
 ﻿<?php
     try {
 		include_once('./config/database.php');
-		include_once('./core/include/init.php');
+		include_once('./core/init.php');
 
 		$dbh = new PDO('mysql:dbname=' . DB_NAME . ';host='.DB_HOST . '', DB_USER, DB_PASS);
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
