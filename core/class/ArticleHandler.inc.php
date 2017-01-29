@@ -74,7 +74,7 @@
 
 		static public function getAll($_page = 1, $_articlesPerPage) {
 			if($_articlesPerPage === null) {
-				$_articlesPerPage = System::getSetting($this->$dbh, "articlesPerPage");
+				//$_articlesPerPage = System::getSetting($this->$dbh, "articlesPerPage");
 			}
 
 			$offset = ($_page - 1) * $_articlesPerPage;

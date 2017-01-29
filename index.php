@@ -72,7 +72,7 @@ EOT;
 					echo "</pre>";
 				break;
 				case "Stats":
-					System::count_visit();
+					//System::count_visit();
 				break;
 				case "CH":
 					print_r(CalendarHandler::getEventFromDate(date('Y-m-d')));

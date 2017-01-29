@@ -1,5 +1,6 @@
 ﻿<?php
 	include_once("./core/class/MenuHandler.inc.php");
+	include_once("./core/class/System.inc.php");
 
 	try {
 		$dbh = new PDO('mysql:host=localhost;dbname=cms', 'root', '');
@@ -11,7 +12,9 @@
 		foreach ($menu as $item) {
 			echo $item['title'];
 		}
-		
+
+		var_dump(System::setSetting($dbh, "dwawddwa", 0));
+
 		/*
 		if(!(isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1)) {
 			if(!isset($_COOKIE['Visitor'])) {
