@@ -5,7 +5,7 @@
 - *Still work in progress!*
 - *Feature-List and more will be added later*
 - Changelog changed ;)
-- February 2nd, 2017: renaming into "Draconis-CMS"
+- February 2nd, 2017: renaimed into "Draconis-CMS"
 
 ## Changelog ##
 ###Version: 0.3.1 (January 29th, 2017)###
