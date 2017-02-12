@@ -4,12 +4,6 @@
 		include_once("../config/database.php");
 		require '../core/init.php';
 
-		ArticleHandler::get_form($_SERVER['QUERY_STRING']);
-
-		if(isset($_POST['ah_BtnSave'])) {
-			ArticleHandler::write($_POST['ah_Title'], $_POST['ah_Content']);
-		}
-
 		$sql = "SELECT property, value, DATE_FORMAT(added, '%d.%m.%Y - %H:%i') AS 'added', DATE_FORMAT(modified, '%d.%m.%Y - %H:%i') AS 'modified' FROM cms_settings";
 		$query = mysql_query($sql);
 
@@ -23,6 +17,8 @@
 	}
 	catch (Exception $e) {
 		echo "<div class='cms_msg_error'>" . $e->getMessage() . "</div>";
-		if($e->getCode() == 1) { ArticleHandler::setup(); }
+		if($e->getCode() == 1) {
+			ArticleHandler::setup();
+		}
 	}
 ?>

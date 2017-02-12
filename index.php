@@ -44,25 +44,26 @@ EOT;
 					#----------
 				break;
 				case "Article":
+					$ah = new ArticleHandler($dbh);
 					$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 					$prevPage = ($currentPage - 1 > 0) ? $currentPage - 1 : 1;
 					$nextPage = $currentPage + 1;
-					$aPP = ArticleHandler::getArticlesPerPage($dbh);
+					//$aPP = ArticleHandler::getArticlesPerPage($dbh);
+					$aPP = 25;
 
 					setcookie("cms_articles_per_page", "10");
 					$articlesPerPage = isset($_COOKIE["cms_articles_per_page"]) ? $_COOKIE["cms_articles_per_page"] : null;
 
 					echo "<h2>Seite {$currentPage}</h2><h5>{$aPP} Artikel pro Seite<br/>{$articlesPerPage}</h5>";
 					echo "<a href='?action=Article&page={$prevPage}'>Vorherige</a>";
-					echo "<a href='?action=Article&page={$nextPage}'>Nächste</a>";
+					echo "<a href='?action=Article&page={$nextPage}'>Nächste</a><br>";
 
-					echo "<pre>";
-					print_r(ArticleHandler::getAll($currentPage, $articlesPerPage));
-					echo "</pre>";
+					foreach($ah->getAll() as $article)
+					{
+					    echo $article->toJSON(), "<br>";
+					}
 				break;
 				case "API":
-					$articlesPerPage = isset($_COOKIE["cms_articles_per_page"]) ? $_COOKIE["cms_articles_per_page"] : null;
-
 					echo "<pre>";
 					print_r("[WIP]");
 					echo "</pre>";

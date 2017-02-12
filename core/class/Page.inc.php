@@ -40,7 +40,7 @@
 		}
 
 		public function setContent() {
-			$tthis->content = print_r($_SERVER);
+			$this->content = print_r($_SERVER);
 		}
 
 		public function show() {
