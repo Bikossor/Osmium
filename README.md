@@ -1,11 +1,10 @@
-# Draconis-CMS #
+# Content-Management-System #
 
 ## Description ##
 - A simple and easy-to-use [content management system](https://en.wikipedia.org/wiki/Content_management_system), written in PHP by [André Lichtenthäler](https://twitter.com/Bikossor).
 - *Still work in progress!*
 - *Feature-List and more will be added later*
 - Changelog changed ;)
-- February 2nd, 2017: renaimed into "Draconis-CMS"
 
 ## Changelog ##
 ###Version: 0.3.1 (January 29th, 2017)###
