@@ -7,6 +7,10 @@
 - Changelog changed ;)
 
 ## Changelog ##
+### Version: 0.4.0 (February 14th, 2017) ###
+- [Added] ArticleHandler now supports Pagination
+- [Added] Table for ArticleHandler has now a 'aid' column
+
 ### Version: 0.3.2 (February 12th, 2017) ###
 - [Fixed] ArticleHandler now performs correctly
 - [Removed] Function 'getByTitle()' in the ArticleHandler
@@ -21,7 +25,7 @@
 
 ### Version: 0.3.0 (January 29th, 2017) ###
 - [Changed] System has now a error-handling and input validation
-- [Changed] System has now static functions **(again)**
+- [Changed] System has now static functions *(again)*
 - [Changed] ArticleHandler is now using PDO
 - [Changed] ArticleHandler has now a error-handling
 - [Changed] MenuHandler has now a error-handling and input validation
