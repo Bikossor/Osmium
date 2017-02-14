@@ -16,9 +16,8 @@
 		<a href='./'>Start</a>
 		<a href="?action=ThemeHandler">ThemeHandler</a>
 		<a href="?action=Article">Article</a>
-		<a href="?action=API">API</a>
-		<a href="?action=Stats">Stats</a>
 		<a href="?action=CH">CalendarHandler</a>
+		<a href="?action=System">System</a>
 		<hr/>
 EOT;
 
@@ -48,31 +47,21 @@ EOT;
 					$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 					$prevPage = ($currentPage - 1 > 0) ? $currentPage - 1 : 1;
 					$nextPage = $currentPage + 1;
-					//$aPP = ArticleHandler::getArticlesPerPage($dbh);
-					$aPP = 25;
-
-					setcookie("cms_articles_per_page", "10");
-					$articlesPerPage = isset($_COOKIE["cms_articles_per_page"]) ? $_COOKIE["cms_articles_per_page"] : null;
-
-					echo "<h2>Seite {$currentPage}</h2><h5>{$aPP} Artikel pro Seite<br/>{$articlesPerPage}</h5>";
+					
+					echo "<h2>Seite {$currentPage}</h2>";
 					echo "<a href='?action=Article&page={$prevPage}'>Vorherige</a>";
 					echo "<a href='?action=Article&page={$nextPage}'>Nächste</a><br>";
 
-					foreach($ah->getAll() as $article)
+					foreach($ah->getAll($currentPage, $limit) as $article)
 					{
 					    echo $article->toJSON(), "<br>";
 					}
 				break;
-				case "API":
-					echo "<pre>";
-					print_r("[WIP]");
-					echo "</pre>";
-				break;
-				case "Stats":
-					//System::count_visit();
-				break;
 				case "CH":
 					print_r(CalendarHandler::getEventFromDate(date('Y-m-d')));
+				break;
+				case "System":
+
 				break;
 				default:
 					echo "<h1>Nix gefunden!</h1>";
@@ -85,7 +74,7 @@ EOT;
 		}
 	}
 	catch (Exception $e) {
-		echo "<div class='box msg_error'>" . $e->getMessage() . "</div>";
+		echo "<div class='box msg_error'>", $e->getMessage(), "</div>";
 	}
 
 ?>

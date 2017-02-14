@@ -1,5 +1,6 @@
 <?php
 	class Article {
+		public $aid;
 		public $title;
 		public $title_sdx;
 		public $content;
