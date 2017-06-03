@@ -8,23 +8,23 @@
 		$dbh->query('SET NAMES UTF8');
 
 		$sys = new System($dbh);
-
-		echo "<link rel='stylesheet' href='" . ThemeHandler::getFile($dbh, "/styles/style.css") . "'>";
-		echo <<<EOT
+		$th = new ThemeHandler($dbh);
+	?>
+		<link rel="stylesheet" href="<?php echo $th->getFile("/styles/style.css"); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<h1>Content-Management-System</h1>
-		<a href='./'>Start</a>
+		<a href="./">Start</a>
 		<a href="?action=ThemeHandler">ThemeHandler</a>
 		<a href="?action=Article">Article</a>
 		<a href="?action=CH">CalendarHandler</a>
 		<a href="?action=System">System</a>
 		<hr/>
-EOT;
-
+	<?php
 		if(isset($_GET['action'])) {
 			switch($_GET['action']) {
 				case "ThemeHandler":
-					echo "<img src='" . ThemeHandler::getFile($dbh, "/header.jpg") . "' style='width:30%;height:auto'><br/>";
+					echo "<img src='" . $th->getFile("/header.jpg") . "' style='width:30%;height:auto'><br/>";
 
 					$dirTheme = "./theme/";
 					$dir = scandir($dirTheme);
@@ -47,12 +47,12 @@ EOT;
 					$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 					$prevPage = ($currentPage - 1 > 0) ? $currentPage - 1 : 1;
 					$nextPage = $currentPage + 1;
-					
+
 					echo "<h2>Seite {$currentPage}</h2>";
 					echo "<a href='?action=Article&page={$prevPage}'>Vorherige</a>";
 					echo "<a href='?action=Article&page={$nextPage}'>Nächste</a><br>";
 
-					foreach($ah->getAll($currentPage, $limit) as $article)
+					foreach($ah->getAll($currentPage) as $article)
 					{
 					    echo $article->toJSON(), "<br>";
 					}
