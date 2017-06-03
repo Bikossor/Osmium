@@ -6,6 +6,8 @@
 
 ## Changelog
 ### Version: 0.5.0 (June 3rd, 2017)
+- [Added] PathFinder-Class to handle paths in the future
+- [Added] A CacheController
 
 ### Version: 0.4.0 (February 14th, 2017)
 - [Added] ArticleHandler now supports Pagination
