@@ -4,7 +4,6 @@
 		$path_module = sprintf('./module/%s.zip', $name);
 
 		if(file_exists($path_core)) {
-			echo "path_core";
 			require $path_core;
 		}
 		elseif(file_exists($path_module)) {
