@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Admin</title>
+        <link rel="stylesheet" href="<?php echo URL ?>theme/default/styles/style.css">
+    </head>
+    <body>
+        <h1>Admin-Dashboard</h1>
+        <h2>Admin</h2>
+        <a href="<?php echo URL ?>">Home</a>
+        <a href="<?php echo URL ?>About">About</a>
+        <a href="<?php echo URL ?>Login">Login</a>
+        <?php
+            /*
+            Session::start();
+            if(!isset($_SESSION['UID'])) {
+                header('Location: ' . URL);
+                exit();
+            }
+            */
+        ?>
+        <form id="insertArticle" action="<?php echo URL ?>Admin/xhrInsertArticle" method="POST">
+            <input type="text" name="Text" required>
+            <input type="submit" value="New">
+        </form>
+        <ul id="getArticles" data-url="<?php echo URL ?>Admin/xhrInsertArticle">
+
+        </ul>
+        <?php echo pathinfo(join(array($_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'])))['dirname'] ?>
+        <script type="text/javascript" src="<?php echo URL ?>assets/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL ?>assets/js/app.js"></script>
+    </body>
+</html>
