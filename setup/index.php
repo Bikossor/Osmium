@@ -2,13 +2,15 @@
 	$start = microtime();
 	$dirs = [
 		"../admin/",
-		"../core/",
-		"../core/class/",
-		"../core/include/",
-		"../storage/",
-		"../template/",
 		"../config/",
-		"../plugin/"
+		"../config/lang/",
+		"../core/",
+		"../core/controller/",
+		"../core/library/",
+		"../core/model/",
+		"../core/view/",
+		"../storage/",
+		"../module/"
 	];
 
 	$dir_status = [];
