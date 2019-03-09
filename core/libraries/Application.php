@@ -1,13 +1,17 @@
 <?php
-    class Application {
-    	public function __construct() {
-            require './core/libraries/Controller.php';
-            //require './core/libraries/View.php';
-            require './core/exceptions/ControllerException.php';
-        }
+    require './core/libraries/Controller.php';
+    require './core/exceptions/ControllerException.php';
 
+    class Application {
+    	public function __construct() { }
+        
         public function run() {
-            $path = isset($_GET['uri']) ? explode('/', filter_var(rtrim($_GET['uri'], '/')), FILTER_SANITIZE_URL) : null;
+            if (RewriteUrl) {
+                $path = isset($_GET['uri']) ? explode('/', filter_var(rtrim($_GET['uri'], '/')), FILTER_SANITIZE_URL) : null;
+            }
+            else {
+                $path = isset($_GET['uri']) ? $_GET['uri'] : null;
+            }
 
             if(empty($path[0])) {
                 require './core/controllers/IndexController.php';
