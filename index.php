@@ -1,7 +1,7 @@
 <?php
     try {
-        require './config.php';
-		require './core/init.php';
+        require './novus.config.php';
+		require './core/Bootstrapper.php';
         
 		$app = new Application();
         $app->run();
