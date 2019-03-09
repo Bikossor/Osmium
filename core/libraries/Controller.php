@@ -1,5 +1,5 @@
 <?php
-	class Controller {
+	abstract class Controller {
 		public function __construct() {
             require './core/exceptions/ModelException.php';
 
