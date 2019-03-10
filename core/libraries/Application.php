@@ -28,7 +28,9 @@
                     $controller->loadModel($path[0]);
                 }
                 else {
-                    throw new ControllerException("\"$nameController\" doesn't exist!");
+                    header("HTTP/1.1 404 Not Found");
+                    include "./core/views/error/404.phtml";
+                    return;
                 }
             }
 
@@ -36,10 +38,14 @@
                 if(isset($path[2])) {
                     $controller->{$path[1]}($path[2]);
                 }
-                else {
+                elseif(method_exists($controller, $path[1])) {
                     $controller->{$path[1]}();
                 }
-
+                else {
+                    header("HTTP/1.1 404 Not Found");
+                    include "./core/views/error/404.phtml";
+                    return;
+                }
             }
             
             $controller->index();
