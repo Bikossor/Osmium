@@ -7,7 +7,13 @@
         $app->run();
 	}
 	catch (Exception $e) {
-		echo $e;
+		require_once './core/controllers/ErrorController.php';
+		require_once "./Core/Enums/HttpStatus.php";
+		
+		$controller = new ErrorController();
+		$controller->renderHttpStatus(HttpStatus::INTERNAL_SERVER_ERROR);
+		
+		return;
 	}
 
 ?>
