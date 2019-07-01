@@ -5,7 +5,7 @@
     class Application {
     	public function __construct() { }
         
-        public function run() {
+        public function run(): void {
             if (RewriteUrl) {
                 $path = isset($_GET['uri']) ? explode('/', filter_var(rtrim($_GET['uri'], '/')), FILTER_SANITIZE_URL) : null;
             }

@@ -3,7 +3,7 @@
 	 * A static class which can format a date diff to a good readable string.
 	 */
 	class FacileDate {
-		public static function format(DateTime $dt1, DateTime $dt2) {
+		public static function format(DateTime $dt1, DateTime $dt2): string {
 			$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 			$cfg = parse_ini_file(sprintf("./config/lang/%s.ini", $lang));
 			$dd = $dt1->diff($dt2);

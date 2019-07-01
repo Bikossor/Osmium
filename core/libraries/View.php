@@ -4,7 +4,7 @@
             require_once './core/exceptions/ViewException.php';
         }
 
-        public function render($viewName) {
+        public function render(string $viewName): void {
             $viewPath = './core/views/' . $viewName . '.phtml';
 
             if(file_exists($viewPath)) {

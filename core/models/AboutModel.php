@@ -4,7 +4,7 @@
             parent::__construct();
         }
 
-        public function getArticles() {
+        public function getArticles(): array {
             $sth = $this->db->query('SELECT * FROM articles');
             $sth->execute();
             return $sth->fetchAll(PDO::FETCH_ASSOC);

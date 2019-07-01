@@ -6,7 +6,7 @@
             $this->view = new View();
 		}
 
-        public function loadModel($name) {
+        public function loadModel(string $name): void {
             $path = './core/models/' . ucfirst($name) . 'Model.php';
             $name = $name . 'Model';
 
