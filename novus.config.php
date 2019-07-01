@@ -8,4 +8,5 @@
 
 	define("RewriteUrl", true);
     define("URL", "http://localhost/Novus.io/");
+	define("URL", "http://localhost/Novus.io/");
 ?>
