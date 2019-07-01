@@ -7,6 +7,6 @@
 	define("DB_NAME", "cms");
 
 	define("RewriteUrl", true);
-    define("URL", "http://localhost/Novus.io/");
+	define("IsDebug", false);
 	define("URL", "http://localhost/Novus.io/");
 ?>
