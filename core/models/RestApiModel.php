@@ -5,8 +5,24 @@
         }
 
         public function Test() {
-            $sth = $this->db->query('SELECT * FROM articles;');
-            $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+            // $sth = $this->db->query('SELECT * FROM articles;');
+            $data = [
+                [
+                    "Name" => "Felix Blume",
+                    "StageName" => "Kollegah",
+                    "Age" => 34
+                ],
+                [
+                    "Name" => "Donald Glover",
+                    "StageName" => "Childish Gambino",
+                    "Age" => 35
+                ],
+                [
+                    "Name" => "Michael Schindler",
+                    "StageName" => "Shindy",
+                    "Age" => 30
+                ]
+            ];
 
             header('Access-Control-Allow-Origin: *');
             header('Cache-Control: public, max-age=10');

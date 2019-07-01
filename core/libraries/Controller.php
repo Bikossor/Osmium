@@ -1,7 +1,7 @@
 <?php
 	abstract class Controller {
 		public function __construct() {
-            require './core/exceptions/ModelException.php';
+            require_once './core/exceptions/ModelException.php';
 
             $this->view = new View();
 		}
@@ -11,7 +11,7 @@
             $name = $name . 'Model';
 
             if(file_exists($path)) {
-                require $path;
+                require_once $path;
                 $this->model = new $name;
             }
             else {

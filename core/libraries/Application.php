@@ -1,6 +1,6 @@
 <?php
-    require './core/libraries/Controller.php';
-    require './core/exceptions/ControllerException.php';
+    require_once './core/libraries/Controller.php';
+    require_once './core/exceptions/ControllerException.php';
 
     class Application {
     	public function __construct() { }
@@ -14,7 +14,7 @@
             }
 
             if(empty($path[0])) {
-                require './core/controllers/IndexController.php';
+                require_once './core/controllers/IndexController.php';
                 $controller = new IndexController();
                 $controller->loadModel('index');
             }
@@ -23,13 +23,17 @@
                 $pathController = './core/controllers/' . $nameController . '.php';
 
                 if(file_exists($pathController)) {
-                    require $pathController;
+                    require_once $pathController;
                     $controller = new $nameController;
                     $controller->loadModel($path[0]);
                 }
                 else {
-                    header("HTTP/1.1 404 Not Found");
-                    include "./core/views/error/404.phtml";
+                    require_once './core/controllers/ErrorController.php';
+                    require_once "./Core/Enums/HttpStatus.php";
+
+                    $controller = new ErrorController();
+                    $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
+
                     return;
                 }
             }
@@ -42,8 +46,12 @@
                     $controller->{$path[1]}();
                 }
                 else {
-                    header("HTTP/1.1 404 Not Found");
-                    include "./core/views/error/404.phtml";
+                    require_once './core/controllers/ErrorController.php';
+                    require_once "./Core/Enums/HttpStatus.php";
+                    
+                    $controller = new ErrorController();
+                    $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
+
                     return;
                 }
             }

@@ -1,5 +1,5 @@
 <?php
-    class Model {
+    abstract class Model {
         public function __construct() {
             $this->db = new Database();
         }
