@@ -1,13 +1,13 @@
 <?php
 	abstract class Controller {
 		public function __construct() {
-            require_once './core/exceptions/ModelException.php';
+            require_once './src/exceptions/ModelException.php';
 
             $this->view = new View();
 		}
 
         public function loadModel(string $name): void {
-            $path = './core/models/' . ucfirst($name) . 'Model.php';
+            $path = './src/models/' . ucfirst($name) . 'Model.php';
             $name = $name . 'Model';
 
             if(file_exists($path)) {

@@ -1,6 +1,6 @@
 <?php
 	spl_autoload_register(function($name) {
-		$path_core = sprintf('./core/libraries/%s.php', $name);
+		$path_core = sprintf('./src/libraries/%s.php', $name);
 		// $path_module = sprintf('./module/%s.zip', $name);
 
 		if(file_exists($path_core)) {

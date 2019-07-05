@@ -4,11 +4,11 @@
 		"../admin/",
 		"../config/",
 		"../config/lang/",
-		"../core/",
-		"../core/controller/",
-		"../core/library/",
-		"../core/model/",
-		"../core/view/",
+		"../src/",
+		"../src/controller/",
+		"../src/library/",
+		"../src/model/",
+		"../src/view/",
 		"../storage/",
 		"../module/"
 	];

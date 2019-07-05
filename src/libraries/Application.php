@@ -1,6 +1,6 @@
 <?php
-require_once './core/libraries/Controller.php';
-require_once './core/exceptions/ControllerException.php';
+require_once './src/libraries/Controller.php';
+require_once './src/exceptions/ControllerException.php';
 
 class Application
 {
@@ -18,7 +18,7 @@ class Application
         $targetArguments = !empty($uriComponent[2]) ? $uriComponent[2] : null;
 
         $nameController = $targetController . 'Controller';
-        $pathController = './core/controllers/' . $nameController . '.php';
+        $pathController = './src/controllers/' . $nameController . '.php';
 
         if (file_exists($pathController)) {
             require_once $pathController;
@@ -30,7 +30,7 @@ class Application
             return;
         }
 
-        require_once './core/controllers/ErrorController.php';
+        require_once './src/controllers/ErrorController.php';
         require_once './Core/Enums/HttpStatus.php';
 
         $controller = new ErrorController();

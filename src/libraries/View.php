@@ -1,11 +1,11 @@
 <?php
     class View {
         public function __construct() {
-            require_once './core/exceptions/ViewException.php';
+            require_once './src/exceptions/ViewException.php';
         }
 
         public function render(string $viewName): void {
-            $viewPath = './core/views/' . $viewName . '.phtml';
+            $viewPath = './src/views/' . $viewName . '.phtml';
 
             if(file_exists($viewPath)) {
                 require_once $viewPath;

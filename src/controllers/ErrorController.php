@@ -1,5 +1,5 @@
 <?php
-    require_once "./Core/Enums/HttpStatus.php";
+    require_once "./src/enums/HttpStatus.php";
 
 	class ErrorController extends Controller {
 		public function __construct() {
