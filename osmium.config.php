@@ -8,5 +8,5 @@
 
 	define("RewriteUrl", true);
 	define("IsDebug", false);
-	define("URL", "http://localhost/Novus.io/");
+	define("URL", "http://localhost/Osmium/");
 ?>

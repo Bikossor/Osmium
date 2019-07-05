@@ -1,6 +1,6 @@
 <?php
     try {
-        require_once './novus.config.php';
+        require_once './osmium.config.php';
 		require_once './src/Bootstrapper.php';
         
 		$app = new Application();
