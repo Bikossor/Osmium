@@ -12,7 +12,7 @@
     "type": "project",
     "version": "0.6.0",
     "license": "GPL-3.0",
-    "minimum-stability": "beta",
+    "minimum-stability": "stable",
     "require": {},
     "authors": [
         {
