@@ -1,0 +1,24 @@
+{
+    "name": "bikossor/osmium",
+    "description": "A lightweight and powerful MVC framework written in PHP",
+    "homepage": "https://github.com/Bikossor/Osmium",
+    "keywords": [
+        "MVC",
+        "PHP",
+        "Lightweight",
+        "Powerful",
+        "Framework"
+    ],
+    "type": "project",
+    "version": "0.6.0",
+    "license": "GPL-3.0",
+    "minimum-stability": "beta",
+    "require": {},
+    "authors": [
+        {
+            "name": "André Lichtenthäler",
+            "email": "andre.lichtenthaeler@gmail.com",
+            "role": "Initial creator"
+        }
+    ]
+}
