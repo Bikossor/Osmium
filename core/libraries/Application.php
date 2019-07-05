@@ -1,62 +1,41 @@
 <?php
-    require_once './core/libraries/Controller.php';
-    require_once './core/exceptions/ControllerException.php';
+require_once './core/libraries/Controller.php';
+require_once './core/exceptions/ControllerException.php';
 
-    class Application {
-    	public function __construct() { }
-        
-        public function run(): void {
-            if (RewriteUrl) {
-                $path = isset($_GET['uri']) ? explode('/', filter_var(rtrim($_GET['uri'], '/')), FILTER_SANITIZE_URL) : null;
-            }
-            else {
-                $path = isset($_GET['uri']) ? $_GET['uri'] : null;
-            }
+class Application
+{
+    public function __construct()
+    {}
 
-            if(empty($path[0])) {
-                require_once './core/controllers/IndexController.php';
-                $controller = new IndexController();
-                $controller->loadModel('index');
-            }
-            else {
-                $nameController = $path[0] . 'Controller';
-                $pathController = './core/controllers/' . $nameController . '.php';
+    public function run(): void
+    {
+        $sanitizedUri = filter_input(INPUT_GET, 'uri', FILTER_SANITIZE_URL);
+        $trimmedUri = rtrim($sanitizedUri, '/');
+        $uriComponent = explode('/', $trimmedUri);
 
-                if(file_exists($pathController)) {
-                    require_once $pathController;
-                    $controller = new $nameController;
-                    $controller->loadModel($path[0]);
-                }
-                else {
-                    require_once './core/controllers/ErrorController.php';
-                    require_once "./Core/Enums/HttpStatus.php";
+        $targetController = !empty($uriComponent[0]) ? $uriComponent[0] : 'Index';
+        $targetMethod = !empty($uriComponent[1]) ? $uriComponent[1] : 'Index';
+        $targetArguments = !empty($uriComponent[2]) ? $uriComponent[2] : null;
 
-                    $controller = new ErrorController();
-                    $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
+        $nameController = $targetController . 'Controller';
+        $pathController = './core/controllers/' . $nameController . '.php';
 
-                    return;
-                }
-            }
+        if (file_exists($pathController)) {
+            require_once $pathController;
 
-            if(isset($path[1])) {
-                if(isset($path[2])) {
-                    $controller->{$path[1]}($path[2]);
-                }
-                elseif(method_exists($controller, $path[1])) {
-                    $controller->{$path[1]}();
-                }
-                else {
-                    require_once './core/controllers/ErrorController.php';
-                    require_once "./Core/Enums/HttpStatus.php";
-                    
-                    $controller = new ErrorController();
-                    $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
+            $controller = new $nameController;
+            $controller->loadModel($targetController);
+            $controller->{$targetMethod}($targetArguments);
 
-                    return;
-                }
-            }
-            
-            $controller->index();
+            return;
         }
+
+        require_once './core/controllers/ErrorController.php';
+        require_once './Core/Enums/HttpStatus.php';
+
+        $controller = new ErrorController();
+        $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
+
+        return;
     }
-?>
+}
