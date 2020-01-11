@@ -1,28 +1,32 @@
 <?php
-    class LoginModel extends Model {
-        public function __construct() {
+
+namespace Osmium\Model {
+    class LoginModel extends \Osmium\Core\Model
+    {
+        public function __construct()
+        {
             parent::__construct();
         }
 
-        public function run() {
+        public function run()
+        {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
             $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
             $sth = $this->db->prepare('SELECT uid, name, password FROM users WHERE name=:name');
             $sth->execute(['name' => $name]);
 
-            $data = $sth->fetch(PDO::FETCH_ASSOC);
+            $data = $sth->fetch(\PDO::FETCH_ASSOC);
 
             $success = password_verify($password, $data['password']);
-            
-            if($success) {
+
+            if ($success) {
                 echo "Logged In!";
-                Session::start();
+                // Session::start();
                 $_SESSION['UID'] = $data['uid'];
-            }
-            else {
-                throw new Exception("Username or password wrong!");
+            } else {
+                throw new \Exception("Username or password wrong!");
             }
         }
     }
-?>
+}
