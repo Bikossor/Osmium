@@ -1,6 +1,9 @@
 <?php
 
 namespace Osmium\Core {
+
+    use Osmium\Exception\ViewException;
+
     class View
     {
         public function __construct()
@@ -14,7 +17,7 @@ namespace Osmium\Core {
             if (file_exists($viewPath)) {
                 require_once $viewPath;
             } else {
-                throw new \Osmium\Exception\ViewException("View \"$viewName\" doesn't exist!");
+                throw new ViewException("View \"$viewName\" doesn't exist!");
             }
         }
     }

@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Controller {
-    class IndexController extends \Osmium\Core\Controller
+
+    use Osmium\Core\Controller;
+
+    class IndexController extends Controller
     {
         public function __construct()
         {

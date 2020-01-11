@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Controller {
-    class RestApiController extends \Osmium\Core\Controller
+
+    use Osmium\Core\Controller;
+
+    class RestApiController extends Controller
     {
         public function __construct()
         {

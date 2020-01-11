@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Controller {
-    class AboutController extends \Osmium\Core\Controller
+
+    use Osmium\Core\Controller;
+
+    class AboutController extends Controller
     {
         public function __construct()
         {

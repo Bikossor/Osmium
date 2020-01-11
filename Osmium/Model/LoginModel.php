@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Model {
-    class LoginModel extends \Osmium\Core\Model
+
+    use Osmium\Core\Model;
+
+    class LoginModel extends Model
     {
         public function __construct()
         {

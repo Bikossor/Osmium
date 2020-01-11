@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Controller {
-    class LoginController extends \Osmium\Core\Controller
+
+    use Osmium\Core\Controller;
+
+    class LoginController extends Controller
     {
         public function __construct()
         {

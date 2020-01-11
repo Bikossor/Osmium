@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Model {
-    class AboutModel extends \Osmium\Core\Model
+
+    use Osmium\Core\Model;
+
+    class AboutModel extends Model
     {
         public function __construct()
         {

@@ -1,7 +1,11 @@
 <?php
 
 namespace Osmium\Controller {
-    class ErrorController extends \Osmium\Core\Controller
+
+    use Osmium\Core\Controller;
+    use Osmium\Enum\HttpStatus;
+
+    class ErrorController extends Controller
     {
         public function __construct()
         {
@@ -12,11 +16,11 @@ namespace Osmium\Controller {
         {
             switch ($statusCode) {
                 default:
-                case \Osmium\Enum\HttpStatus::NOT_FOUND:
+                case HttpStatus::NOT_FOUND:
                     header("HTTP/1.1 404 Not Found");
                     $this->view->render('error/404');
                     return;
-                case \Osmium\Enum\HttpStatus::INTERNAL_SERVER_ERROR:
+                case HttpStatus::INTERNAL_SERVER_ERROR:
                     header("HTTP/1.1 500 Internal Server Error");
                     $this->view->render('error/500');
                     return;

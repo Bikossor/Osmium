@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Model {
-    class IndexModel extends \Osmium\Core\Model
+
+    use Osmium\Core\Model;
+
+    class IndexModel extends Model
     {
         public function __construct()
         {

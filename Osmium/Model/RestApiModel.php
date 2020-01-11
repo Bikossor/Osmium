@@ -1,7 +1,10 @@
 <?php
 
 namespace Osmium\Model {
-    class RestApiModel extends \Osmium\Core\Model
+
+    use Osmium\Core\Model;
+
+    class RestApiModel extends Model
     {
         public function __construct()
         {

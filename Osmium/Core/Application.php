@@ -1,6 +1,10 @@
 <?php
 
 namespace Osmium\Core {
+
+    use Osmium\Controller\ErrorController;
+    use Osmium\Enum\HttpStatus;
+
     class Application
     {
         public function __construct()
@@ -30,8 +34,8 @@ namespace Osmium\Core {
                 return;
             }
 
-            $controller = new \Osmium\Controller\ErrorController();
-            $controller->renderHttpStatus(\Osmium\Enum\HttpStatus::NOT_FOUND);
+            $controller = new ErrorController();
+            $controller->renderHttpStatus(HttpStatus::NOT_FOUND);
 
             return;
         }

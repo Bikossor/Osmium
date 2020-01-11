@@ -1,11 +1,15 @@
 <?php
 
 namespace Osmium\Core {
+
+    use Osmium\Core\View;
+    use Osmium\Exception\ModelException;
+
     abstract class Controller
     {
         public function __construct()
         {
-            $this->view = new \Osmium\Core\View();
+            $this->view = new View();
         }
 
         public function loadModel(string $name): void
@@ -18,7 +22,7 @@ namespace Osmium\Core {
 
                 $this->model = new $namespace;
             } else {
-                throw new \Osmium\Exception\ModelException("Model \"$name\" doesn't exist!");
+                throw new ModelException("Model \"$name\" doesn't exist!");
             }
         }
     }
